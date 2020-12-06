@@ -14,6 +14,7 @@ export class UserService extends UserData {
     lee: { name: 'Lee Wong', picture: 'assets/images/lee.png' },
     alan: { name: 'Alan Thompson', picture: 'assets/images/alan.png' },
     kate: { name: 'Kate Martinez', picture: 'assets/images/kate.png' },
+    mruizm: { name: 'Marco Ruiz', picture: 'assets/images/mruizm.png' }
   };
   private types = {
     mobile: 'mobile',
@@ -27,6 +28,7 @@ export class UserService extends UserData {
     { user: this.users.lee, type: this.types.mobile },
     { user: this.users.alan, type: this.types.home },
     { user: this.users.kate, type: this.types.work },
+    { user: this.users.mruizm, type: this.types.work }
   ];
   private recentUsers: RecentUsers[]  = [
     { user: this.users.alan, type: this.types.home, time: this.time.setHours(21, 12)},
@@ -35,8 +37,9 @@ export class UserService extends UserData {
     { user: this.users.lee, type: this.types.mobile, time: this.time.setHours(11, 24)},
     { user: this.users.jack, type: this.types.mobile, time: this.time.setHours(10, 45)},
     { user: this.users.kate, type: this.types.work, time: this.time.setHours(9, 42)},
-    { user: this.users.kate, type: this.types.work, time: this.time.setHours(9, 31)},
-    { user: this.users.jack, type: this.types.mobile, time: this.time.setHours(8, 0)},
+    // { user: this.users.kate, type: this.types.work, time: this.time.setHours(9, 31)},
+    // { user: this.users.jack, type: this.types.mobile, time: this.time.setHours(8, 0)},
+    { user: this.users.mruizm, type: this.types.work, time: this.time.setHours(7, 0)}
   ];
 
   getUsers(): Observable<any> {

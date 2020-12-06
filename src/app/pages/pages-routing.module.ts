@@ -10,13 +10,18 @@ const routes: Routes = [{
   path: '',
   component: PagesComponent,
   children: [
+    // {
+    //   path: 'dashboard',
+    //   component: ECommerceComponent,
+    // },
     {
       path: 'dashboard',
-      component: ECommerceComponent,
+      component: DashboardComponent,
     },
     {
-      path: 'iot-dashboard',
-      component: DashboardComponent,
+      path: 'register',
+      loadChildren: () => import('./register/register.module')
+        .then(m => m.RegisterModule),
     },
     {
       path: 'layout',

@@ -1,0 +1,326 @@
+<!-- <div class="row">
+    <div class="col-lg-6">
+        <nb-card>
+            <nb-card-header>NUEVO REGISTRO</nb-card-header>
+            <nb-card-body class="checkbox-radio">
+                <div class="demo-items">
+                    <div class="row">
+                        <div class="col-sm-4">
+                            <nb-radio-group [ngModel]="form_type" (ngModelChange)="getFormType($event)">
+                                <nb-radio class="radio-block" value="student_form">Estudiante</nb-radio>
+                            </nb-radio-group>
+                        </div>
+                        <div class="col-sm-4">
+                            <nb-radio-group [ngModel]="form_type" (ngModelChange)="getFormType($event)">
+                                <nb-radio class="radio-block" value="teacher_form">Docente</nb-radio>
+                            </nb-radio-group>
+                        </div>
+                        <div class="col-sm-4">
+                            <nb-radio-group [ngModel]="form_type" (ngModelChange)="getFormType($event)">
+                                <nb-radio class="radio-block" value="admin_form">Administrativo</nb-radio>
+                            </nb-radio-group>
+                        </div>
+                    </div>                  
+                </div>
+            </nb-card-body>
+        </nb-card>
+    </div>
+</div> -->
+<div class="row">
+    <div class="col-lg-6">
+        <nb-card>
+            <nb-card-header>NUEVO REGISTRO</nb-card-header>
+            <nb-card-body>
+                <div class="demo-items">
+                    <div class="row">
+                        <div class="col-sm-4">
+                            <nb-radio-group [(ngModel)]="form_type" (ngModelChange)="getFormType($event)" >
+                                <nb-radio class="radio-block" value="student_form">Estudiante</nb-radio>
+                            </nb-radio-group>
+                        </div>
+                        <div class="col-sm-4">
+                            <nb-radio-group [(ngModel)]="form_type" (ngModelChange)="getFormType($event)">
+                                <nb-radio class="radio-block" value="teacher_form">Docente</nb-radio>
+                            </nb-radio-group>
+                        </div>
+                        <div class="col-sm-4">
+                            <nb-radio-group [(ngModel)]="form_type" (ngModelChange)="getFormType($event)">
+                                <nb-radio class="radio-block" value="admin_form">Administrativo</nb-radio>
+                            </nb-radio-group>
+                        </div>
+                    </div>                  
+                </div>
+            </nb-card-body>
+        </nb-card>
+    </div>
+    <div class="col-lg-6" *ngIf="registry_id_div">
+        <nb-card class="registry-id" status="success">
+            <nb-card-header class="registry-id-header">NÚMERO DE REGISTRO</nb-card-header>
+            <nb-card-body class="registry-id-body">
+                {{registry_record_id}}
+            </nb-card-body>
+        </nb-card>
+    </div>
+</div>
+<form [formGroup]="studentProfileFormData" (ngSubmit)="onSubmit()">
+    <div class="row" *ngIf="form_student_div">
+        <div class="col-lg-6">
+            <nb-card class="card-no-margin card-no-border-bottom card-no-bottom-border-radius">
+                <nb-card-header>DATOS PERSONALES</nb-card-header>
+                <nb-card-body>
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="form-group">
+                                <label for="input_tudentFirstName" class="label">Nombre</label>
+                                <input fieldSize="small" type="text" nbInput fullWidth id="input_tudentFirstName" placeholder="" formControlName="studentFirstName">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label for="input_studentFirstLastName" class="label">Primer Apellido</label>
+                                <input fieldSize="small" type="text" nbInput fullWidth id="input_studentFirstLastName" placeholder="" formControlName="studentFirstLastName">
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label for="input_studentSecondLastName" class="label">Segundo Apellido</label>
+                                <input fieldSize="small" type="text" nbInput fullWidth id="input_studentSecondLastName" placeholder="" formControlName="studentSecondLastName">
+                            </div>
+                        </div>
+                    </div>                
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label for="input_studentBirthDay" class="label">Fecha de Nacimiento</label>
+                                <input fieldSize="small" nbInput fullWidth id="input_studentBirthDay"        placeholder="" [nbDatepicker]="formpicker" formControlName="studentBirthDay">
+                                <nb-datepicker #formpicker></nb-datepicker>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label for="input_studentGrade" class="label">Nivel</label>
+                                <nb-select size="small" fullWidth selected="-1" id="input_studentGrade" placeholder="" formControlName="studentGrade">
+                                    <nb-option value="Maternal">Maternal</nb-option>
+                                    <nb-option value="Maternal">Kinder</nb-option>
+                                </nb-select>
+                            </div>
+                        </div>
+                    </div>
+                </nb-card-body>
+            </nb-card>
+            <nb-card class="card-no-margin card-no-border-top card-no-top-border-radius">
+                <nb-card-header>DATOS MÉDICOS</nb-card-header>
+                <nb-card-body>
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label for="input_studentVaccines" class="label">Vacunas al día</label>
+                                <nb-select size="small" fullWidth selected="-1" id="input_studentVaccines" placeholder="" formControlName="studentVaccines">
+                                    <nb-option value="1">Sí</nb-option>
+                                    <nb-option value="2">No</nb-option>
+                                </nb-select>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label for="input_studentVaccinesCard" class="label">Subir Archivo</label>
+                                <div class="row">
+                                    <div class="col-sm-12">
+                                        <input fieldSize="small" type="text" nbInput fullWidth id="input_studentVaccinesCard" placeholder="" formControlName="studentVaccinesCard">
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-12">
+                                        <button class="button-spacing" nbButton size="small" status="primary">Subir Archivo</button>
+                                    </div>
+                                </div>
+                                
+                            </div>
+                        </div>
+                    </div>              
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="form-group">
+                                <label for="input_studentMedicalConditions" class="label">Condición Especial/Padecimientos</label>
+                                <textarea nbInput fullWidth placeholder="" id="input_studentMedicalConditions" formControlName="studentMedicalConditions"></textarea>
+                            </div>
+                        </div>
+                    </div>
+                </nb-card-body>
+            </nb-card>
+            <nb-card class="card-no-border-top card-no-top-border-radius">
+                <nb-card-header>CONTACTO(S) DE EMERGENCIA</nb-card-header>
+                <nb-card-body>
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="form-group">
+                                <label for="input_emergencyContactFirstName" class="label">Nombre</label>
+                                <input fieldSize="small" type="text" nbInput fullWidth id="input_emergencyContactFirstName" placeholder="" formControlName="emergencyContactFirstName">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label for="input_emergencyContactFirstLastName" class="label">Primer Apellido</label>
+                                <input fieldSize="small" type="text" nbInput fullWidth id="input_emergencyContactFirstLastName" placeholder="" formControlName="emergencyContactFirstLastName">
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label for="input_emergencyContactSecondLastName" class="label">Segundo Apellido</label>
+                                <input fieldSize="small" type="text" nbInput fullWidth id="input_emergencyContactSecondLastName" placeholder="" formControlName="emergencyContactSecondLastName">
+                            </div>
+                        </div>
+                    </div>                
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label for="input_emergencyContactPhoneNumber1" class="label">Número de Teléfono</label>
+                                <input fieldSize="small" type="text" nbInput fullWidth id="input_emergencyContactPhoneNumber1" placeholder="" formControlName="emergencyContactPhoneNumber1">
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label for="input_emergencyContactPhoneNumber2" class="label">Número de Teléfono</label>
+                                <input fieldSize="small" type="text" nbInput fullWidth id="input_emergencyContactPhoneNumber2" placeholder="" formControlName="emergencyContactPhoneNumber2">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label for="input_emergencyContactStudentRelationship" class="label">Parentezco</label><input fieldSize="small" type="text" nbInput fullWidth id="input_emergencyContactStudentRelationship" placeholder="" formControlName="emergencyContactStudentRelationship">
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label for="input_emergencyContactHomeAddress" class="label">Domicilio</label>
+                                <textarea nbInput fullWidth placeholder="" id="input_emergencyContactHomeAddress" formControlName="emergencyContactHomeAddress"></textarea>
+                            </div>
+                        </div>
+                    </div>
+                </nb-card-body>
+            </nb-card>
+        </div>
+        <div class="col-lg-6">
+            <nb-card class="card-no-margin card-no-border-bottom card-no-bottom-border-radius">
+                <nb-card-header>DATOS DE LA MADRE/ENCARGADA(O)</nb-card-header>
+                <nb-card-body>
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="form-group">
+                                <label for="input_parent1FirstName" class="label">Nombre</label>
+                                <input fieldSize="small" type="text" nbInput fullWidth id="input_parent1FirstName" placeholder="" formControlName="parent1FirstName">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label for="input_parent1FirstLastName" class="label">Primer Apellido</label>
+                                <input fieldSize="small" type="text" nbInput fullWidth id="input_parent1FirstLastName" placeholder="" formControlName="parent1FirstLastName">
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label for="input_parent1SecondLastName" class="label">Segundo Apellido</label>
+                                <input fieldSize="small" type="text" nbInput fullWidth id="input_parent1SecondLastName" placeholder="" formControlName="parent1SecondLastName">
+                            </div>
+                        </div>
+                    </div>                
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label for="input_parent1PhoneNumber" class="label">Número de Teléfono</label>
+                                <input fieldSize="small" type="text" nbInput fullWidth id="input_parent1PhoneNumber" placeholder="" formControlName="parent1PhoneNumber">
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label for="input_parent1JobTitle" class="label">Ocupación</label>
+                                <input fieldSize="small" type="text" nbInput fullWidth id="input_parent1JobTitle" placeholder="" formControlName="parent1JobTitle">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label for="input_parent1Email" class="label">Correo Electrónico</label><input fieldSize="small" type="text" nbInput fullWidth id="input_parent1Email" placeholder="" formControlName="parent1Email">
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label for="input_parent1HomeAddress" class="label">Domicilio</label>
+                                <textarea nbInput fullWidth placeholder="" id="input_parent1HomeAddress" formControlName="parent1HomeAddress"></textarea>
+                            </div>
+                        </div>
+                    </div>
+                </nb-card-body>
+            </nb-card>
+            <nb-card class="padding-bottom card-no-border-top card-no-top-border-radius">
+                <nb-card-header>DATOS DEL PADRE/ENCARGADO(A)</nb-card-header>
+                <nb-card-body>
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="form-group">
+                                <label for="input_parent2FirstName" class="label">Nombre</label>
+                                <input fieldSize="small" type="text" nbInput fullWidth id="input_parent2FirstName" placeholder="" formControlName="parent2FirstName">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label for="input_parent2FirstLastName" class="label">Primer Apellido</label>
+                                <input fieldSize="small" type="text" nbInput fullWidth id="input_parent2FirstLastName" placeholder="" formControlName="parent2FirstLastName">
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label for="input_parent2SecondLastName" class="label">Segundo Apellido</label>
+                                <input fieldSize="small" type="text" nbInput fullWidth id="input_parent2SecondLastName" placeholder="" formControlName="parent2SecondLastName">
+                            </div>
+                        </div>
+                    </div>                
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label for="input_parent2PhoneNumber" class="label">Número de Teléfono</label>
+                                <input fieldSize="small" type="text" nbInput fullWidth id="input_parent2PhoneNumber" placeholder="" formControlName="parent2PhoneNumber">
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label for="input_parent2JobTitle" class="label">Ocupación</label>
+                                <input fieldSize="small" type="text" nbInput fullWidth id="input_parent2JobTitle" placeholder="" formControlName="parent2JobTitle">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label for="input_parent2Email" class="label">Correo Electrónico</label><input fieldSize="small" type="text" nbInput fullWidth id="input_parent2Email" placeholder="" formControlName="parent2Email">
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label for="input_parent2HomeAddress" class="label">Domicilio</label>
+                                <textarea nbInput fullWidth placeholder="" id="input_parent2HomeAddress" formControlName="parent2HomeAddress"></textarea>
+                            </div>
+                        </div>
+                    </div>
+                </nb-card-body>
+            </nb-card>
+        </div>
+        <div class="row center-save-button">
+            <div class="col-lg-12">
+                <button type="submit" nbButton status="primary">Guardar</button>
+            </div>    
+        </div>
+    </div>
+</form>
+
+  

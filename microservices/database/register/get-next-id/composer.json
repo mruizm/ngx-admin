@@ -1,0 +1,8 @@
+{
+    "require": {
+        "aws/aws-sdk-php": "^3.139",
+        "illuminate/database": "^7.24",
+        "doctrine/dbal": "^2.10",
+        "ramsey/uuid": "^4.1"
+    }
+}
