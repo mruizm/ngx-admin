@@ -1,6 +1,6 @@
 {
     "/get-next-id": {
-        "target": "https://nhk18u0pt4.execute-api.us-west-1.amazonaws.com/dev/api/register/get-next-id",
+        "target": "https://n0mhgbhi0m.execute-api.us-west-1.amazonaws.com/dev/api/reg/next-persona-id",
         "secure": false,
         "changeOrigin": true,
         "pathRewrite": {
