@@ -1,4 +1,9 @@
 <?php
+//Microservice name: get-next-id
+//Purpose: To generate the id for next record based on form type (student, teacher, admin)
+//Version: 1.0
+//Date: Aug 9, 2020
+//By: marco.ruiz.mora@gmail.com
 require __DIR__.'/vendor/autoload.php';
 use Psr\Http\Message\ResponseInterface;
 use GuzzleHttp\Client;
@@ -12,13 +17,13 @@ function regaddpersonaid($data)
     header("Access-Control-Allow-Methods","GET, POST");
     header("Access-Control-Allow-Origin","*");
     $data = json_decode($data['body'], true);
-    $role_type = $data['role_type'];
-    $db_action = $data['db_action'];    
-    $created_by = $data['user_id'];
-    $in_data_glob = $data['in_data_glob'];
-    $date_time = new DateTime('NOW', new DateTimeZone('US/Eastern'));
-    // $report_id = $date_time->format('Ymd_His_u');
-    $created_timestamp = date("Y-m-d H:i:s");
+    $record_id = $data['register_id'];
+    $record_transaction = $data['register_transaction'];    
+    $record_action = $data['register_action'];
+    $record_type = $data['register_type'];
+    $record_created_by = $data['register_created_by'];
+    // $date_time = new DateTime('NOW', new DateTimeZone('US/Eastern'));
+    $record_created_timestamp = date("Y-m-d H:i:s");
 
     $db_host = $_ENV['DB_HOST'];
     $db_name = $_ENV['DB_NAME'];
@@ -34,33 +39,43 @@ function regaddpersonaid($data)
         'password'  => $db_pwd,
         'charset'   => 'utf8',
         'collation' => 'utf8_unicode_ci',
-        'prefix'    => '',
+        'prefix'    => ''
     ]);
     $capsule->setAsGlobal();
     try{
-        $users = Capsule::table('register_logging')->where('action', '=', 'add')->first();
+        $insert_record = Capsule::table('register_logging')->insert(
+            ['id' => $record_id,
+             'transaction' => $record_transaction,
+             'action' => $record_action,
+             'type' =>  $record_type,
+             'created_by' => $record_created_by,
+             'created_timestamp' => $record_created_timestamp,
+             'updated_by' => 'none',
+             'updated_timestamp' => 'none'
+             ]
+        );
         // $test = Capsule::select('select * from register_logging where id = :id', ['id' => $user_id]);
-        print "$date".":DEBUG:".$created_timestamp.":create_registry:".$user_id."\n";
-        if($users->id == $user_id){
+        print "$record_created_timestamp".":DEBUG".":record_insert:".$record_id.":"."$record_transaction".":"."$record_action".":"."$record_type".":"."$record_created_by".":"."$record_created_timestamp".":".$insert_record.":".""."\n";
+        if($insert_record){
             $r_json_response = array(
                 'status_code' => 200,
-                'response' => 'User id exists.'
+                'response' => 'ok:insert_record:register_logging'
             );
         }
         else{
             $r_json_response = array(
                 'status_code' => 200,
-                'response' => 'User id does not exists.'
+                'response' => 'nok:insert_record:register_logging'
             );
         }
         return [
             'body' => json_encode($r_json_response, JSON_PRETTY_PRINT)
         ];
     }
-    catch(ServerException $e){
+    catch(PDOException $e){
         $r_json_response = array(
             'status_code' => 401,
-            'response' => Psr7\str($e->getResponse())
+            'response' => $e->getMessage()
         );
         return [
             'body' => json_encode($r_json_response, JSON_PRETTY_PRINT)
@@ -68,7 +83,7 @@ function regaddpersonaid($data)
     }
     catch(RequestException $e){
         $r_json_response = array(
-            'status_code' => '401',
+            'status_code' => 401,
             'response' => Psr7\str($e->getResponse())
         );
         return [

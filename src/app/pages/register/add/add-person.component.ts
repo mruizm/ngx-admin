@@ -71,7 +71,7 @@ export class RegisterAddComponent implements OnInit{
     if(this.form_type == 'admin_form'){
       this.register_type = 'admin';
     }
-    let form_data = { 'register_action': 'get_id',
+    let form_data = { 'register_action': 'add',
                       'register_type': this.register_type }
     console.log(form_data)
     this.http.post<{ 
@@ -81,7 +81,7 @@ export class RegisterAddComponent implements OnInit{
         record_action: string;
         record_id: string;
         transaction_id: string
-      } }>('http://localhost:4200/get-next-id', form_data, {headers: 
+      } }>('http://localhost:4200/next-persona-id', form_data, {headers: 
       {'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*' } })
         .subscribe(responseData =>{
           if(this.form_type == 'student_form'){

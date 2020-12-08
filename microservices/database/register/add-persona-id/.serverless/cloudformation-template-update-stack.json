@@ -169,7 +169,7 @@
           "S3Bucket": {
             "Ref": "ServerlessDeploymentBucket"
           },
-          "S3Key": "serverless/reg-add-persona-id/dev/1607402351783-2020-12-08T04:39:11.783Z/reg-add-persona-id.zip"
+          "S3Key": "serverless/reg-add-persona-id/dev/1607440186068-2020-12-08T15:09:46.068Z/reg-add-persona-id.zip"
         },
         "Handler": "handler.regaddpersonaid",
         "Runtime": "provided",
@@ -200,14 +200,14 @@
         "RegaddpersonaidLogGroup"
       ]
     },
-    "RegaddpersonaidLambdaVersionTrkW7Tktj7GKOQA9vf6wfyaHVqrgLDTmm2l27KdQmw": {
+    "RegaddpersonaidLambdaVersionbmgrPmE6LMSV6nFm2pZSoQiK1JBxMuH6URwTRwQ4Q": {
       "Type": "AWS::Lambda::Version",
       "DeletionPolicy": "Retain",
       "Properties": {
         "FunctionName": {
           "Ref": "RegaddpersonaidLambdaFunction"
         },
-        "CodeSha256": "rq7o9FzLX7sfKFShe9uGsqgnX6CPnS0n3T/iMietxrI="
+        "CodeSha256": "RZ+4uLwRVv5Emh6SLutwtr9pSutcunczj5/Wwi2ixmE="
       }
     },
     "ApiGatewayRestApi": {
@@ -349,7 +349,7 @@
         "MethodResponses": []
       }
     },
-    "ApiGatewayDeployment1607402347960": {
+    "ApiGatewayDeployment1607440182331": {
       "Type": "AWS::ApiGateway::Deployment",
       "Properties": {
         "RestApiId": {
@@ -423,7 +423,7 @@
     "RegaddpersonaidLambdaFunctionQualifiedArn": {
       "Description": "Current Lambda function version",
       "Value": {
-        "Ref": "RegaddpersonaidLambdaVersionTrkW7Tktj7GKOQA9vf6wfyaHVqrgLDTmm2l27KdQmw"
+        "Ref": "RegaddpersonaidLambdaVersionbmgrPmE6LMSV6nFm2pZSoQiK1JBxMuH6URwTRwQ4Q"
       }
     },
     "ServiceEndpoint": {

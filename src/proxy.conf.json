@@ -1,10 +1,10 @@
 {
-    "/get-next-id": {
+    "/next-persona-id": {
         "target": "https://n0mhgbhi0m.execute-api.us-west-1.amazonaws.com/dev/api/reg/next-persona-id",
         "secure": false,
         "changeOrigin": true,
         "pathRewrite": {
-            "^/get-next-id": ""
+            "^/next-persona-id": ""
           }
     }
 }
